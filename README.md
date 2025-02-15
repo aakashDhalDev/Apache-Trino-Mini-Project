@@ -3,6 +3,10 @@
 ## Overview
 This project sets up an Apache Trino environment using Docker and supports data ingestion, validation, and federated queries across multiple databases (MSSQL, MySQL, PostgreSQL).
 
+## Architecture
+
+![Project Architecture](./trino%20project.png)
+
 ## Project Structure
 ```
 .
