@@ -13,20 +13,22 @@ cursor = conn.cursor()
 
 # Define a federated query joining tables across different catalogs
 query = """
-SELECT 
-    c.name, 
-    o.order_date, 
-    p.payment_date, 
-    p.amount AS payment_amount
-FROM mysql.default.customers AS c
-JOIN postgresql.default.orders AS o 
-    ON c.id = o.customer_id
-JOIN mssql.default.payments AS p 
-    ON o.order_id = p.order_id
-"""
-
+            SELECT 
+                c.name, 
+                o.order_date, 
+                p.payment_date, 
+                p.amount AS payment_amount
+            FROM mysql.mydb.customers AS c
+            JOIN postgresql.public.orders AS o 
+                ON c.id = o.customer_id
+            JOIN mssql.dbo.payments AS p 
+                ON o.order_id = p.order_id
+        """
+query_new = """
+                select * from mysql.mydb.customers
+            """
 # Execute the query and fetch the results
-cursor.execute(query)
+cursor.execute(query_new)
 rows = cursor.fetchall()
 
 # Print the federated query results
