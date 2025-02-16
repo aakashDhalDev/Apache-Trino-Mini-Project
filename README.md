@@ -16,12 +16,10 @@ This project sets up an Apache Trino environment using Docker and supports data 
 │   │   ├── mysql.properties
 │   │   ├── postgresql.properties
 │   ├── config.properties
-│   ├── jvm.config
-│   ├── node.properties
-├── ingestor/
-│   ├── add-data.py
-│   ├── check-data.py
-│   ├── federated-query.py
+├── jvm.config
+├── add-data.py
+├── check-data.py
+├── federated-query.py
 ├── docker-compose.yml
 ├── README.md
 ```
@@ -30,7 +28,6 @@ This project sets up an Apache Trino environment using Docker and supports data 
 - **`etc/catalog/*.properties`** - Defines database connectivity for Trino.
 - **`etc/config.properties`** - General configuration for Trino.
 - **`etc/jvm.config`** - JVM settings for Trino.
-- **`etc/node.properties`** - Node-specific settings for Trino.
 
 ### Python Scripts
 - **`add-data.py`** - Populates databases with sample data.
@@ -49,19 +46,19 @@ This will spin up Trino and the associated databases.
 ### 2. Add Data
 Run the following script to insert sample data:
 ```sh
-python ingestor/add-data.py
+python add-data.py
 ```
 
 ### 3. Check Data
 Verify that data is correctly inserted by running:
 ```sh
-python ingestor/check-data.py
+python check-data.py
 ```
 
 ### 4. Run Federated Query
 Execute a federated query across the databases:
 ```sh
-python ingestor/federated-query.py
+python federated-query.py
 ```
 
 ## Notes
