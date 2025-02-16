@@ -16,7 +16,7 @@ This project sets up an Apache Trino environment using Docker and supports data 
 │   │   ├── mysql.properties
 │   │   ├── postgresql.properties
 │   ├── config.properties
-├── jvm.config
+|   ├── jvm.config
 ├── add-data.py
 ├── check-data.py
 ├── federated-query.py
