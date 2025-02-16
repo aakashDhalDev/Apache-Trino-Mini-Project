@@ -4,7 +4,6 @@ import pyodbc
 
 def populate_mysql():
     print("Populating MySQL (customers table)...")
-    # Connect to MySQL (adjust host if needed, e.g., "mysql-server" if running in Docker network)
     cnx = mysql.connector.connect(
         host="localhost",
         user="user",
@@ -13,7 +12,6 @@ def populate_mysql():
     )
     cursor = cnx.cursor()
 
-    # Create the customers table
     create_table = """
         CREATE TABLE IF NOT EXISTS customers (
             id INT PRIMARY KEY,
@@ -24,11 +22,8 @@ def populate_mysql():
         )
     """
     cursor.execute(create_table)
+    cnx.commit()
 
-    # Clear table if it already exists (optional)
-    cursor.execute("DELETE FROM customers")
-
-    # Insert 10 rows into the customers table
     customers_data = [
         (1, 'Alice', 'alice@example.com', 'New York', 'USA'),
         (2, 'Bob', 'bob@example.com', 'Los Angeles', 'USA'),
@@ -50,7 +45,6 @@ def populate_mysql():
 
 def populate_postgresql():
     print("Populating PostgreSQL (orders table)...")
-    # Connect to PostgreSQL (adjust host if needed, e.g., "postgres-server")
     conn = psycopg2.connect(
         host="localhost",
         port=5433,
@@ -60,7 +54,6 @@ def populate_postgresql():
     )
     cursor = conn.cursor()
 
-    # Create the orders table
     create_table = """
         CREATE TABLE IF NOT EXISTS orders (
             order_id INT PRIMARY KEY,
@@ -71,11 +64,8 @@ def populate_postgresql():
         )
     """
     cursor.execute(create_table)
+    conn.commit()
 
-    # Clear table if it exists
-    cursor.execute("DELETE FROM orders")
-
-    # Insert 10 rows into the orders table
     orders_data = [
         (1, 1, '2025-01-01', 100.00, 'completed'),
         (2, 2, '2025-01-02', 150.00, 'completed'),
@@ -125,11 +115,6 @@ def populate_sqlserver():
     cursor.execute(create_table)
     conn.commit()
 
-    # Clear the table if exists
-    cursor.execute("DELETE FROM payments")
-    conn.commit()
-
-    # Insert 10 rows into the payments table
     payments_data = [
         (1, 1, '2025-01-02', 100.00, 'credit card'),
         (2, 2, '2025-01-03', 150.00, 'paypal'),
@@ -151,19 +136,19 @@ def populate_sqlserver():
     print("SQL Server table populated.\n")
 
 if __name__ == '__main__':
-    # try:
-    #     populate_mysql()
-    # except Exception as e:
-    #     print("Error populating MySQL:", e)
+    try:
+        populate_mysql()
+    except Exception as e:
+        print("Error populating MySQL:", e)
     
-    # try:
-    #     populate_postgresql()
-    # except Exception as e:
-    #     print("Error populating PostgreSQL:", e)
+    try:
+        populate_postgresql()
+    except Exception as e:
+        print("Error populating PostgreSQL:", e)
     
     try:
         populate_sqlserver()
     except Exception as e:
         print("Error populating SQL Server:", e)
     
-    # print("Data population complete. You can now run federated queries from Trino to join these tables.")
+    print("Data population complete!!!")

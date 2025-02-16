@@ -16,11 +16,9 @@ def fetch_mysql_data():
         if cnx.open:
             print("Connected to the database")
             with cnx.cursor() as cursor:
-                    # Execute the query to fetch all records from the customers table
                     cursor.execute("SELECT * FROM customers")
                     customers = cursor.fetchall()
 
-                    # Check if any records were fetched
                     if customers:
                         print(f"Total records: {len(customers)}")
                         for customer in customers:
@@ -32,9 +30,8 @@ def fetch_mysql_data():
 
 def fetch_postgresql_data():
     try:
-        # Connect to PostgreSQL
         conn = psycopg2.connect(
-            host="localhost",      # Using host's published port
+            host="localhost",     
             port=5433,
             user="user",
             password="secret",
@@ -55,12 +52,11 @@ def fetch_postgresql_data():
 
 def fetch_sqlserver_data():
     try:
-        # Connect to SQL Server using the published port on the host
         conn_str = (
             "DRIVER={ODBC Driver 17 for SQL Server};"
-            "SERVER=localhost,1434;"   # Ensure this port matches your docker-compose file
+            "SERVER=localhost,1434;"   
             "DATABASE=master;"
-            "UID=sa;"                  # Change if using a different user
+            "UID=sa;"                  
             "PWD=YourStrong!Passw0rd;"
             "TrustServerCertificate=yes;"
         )
